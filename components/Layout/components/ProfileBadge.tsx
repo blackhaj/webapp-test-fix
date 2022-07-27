@@ -2,7 +2,11 @@ import { signOut } from 'next-auth/react';
 import { User } from '@prisma/client';
 
 type Props = {
-  user?: User | null;
+  user?: {
+    name: User['name'];
+    image: User['image'];
+    email: User['email'];
+  } | null;
 };
 
 export const ProfileBadge = ({ user }: Props) => {
@@ -10,10 +14,10 @@ export const ProfileBadge = ({ user }: Props) => {
     <div className="flex flex-shrink-0 p-4 border-t border-gray-200">
       <div className="flex items-center max-w-full">
         <div>
-          {user?.imageUrl && (
+          {user?.image && (
             <img
               className="inline-block w-10 h-10 rounded-full"
-              src={user.imageUrl}
+              src={user.image}
               alt="Profile picture"
             />
           )}

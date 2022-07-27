@@ -14,6 +14,7 @@ import {
 import { Hamburger, SideBar, SidebarMobile } from './components';
 import { NavItem } from '~/types';
 import { signIn, useSession } from 'next-auth/react';
+import { User } from '@prisma/client';
 
 const navItems: NavItem[] = [
   { name: 'Dashboard', href: '/', icon: HomeIcon },
@@ -44,10 +45,7 @@ export const Layout = ({ children }: Props) => {
     return <div>Loading...</div>;
   }
 
-  const user = {
-    name: session?.user?.name,
-    email: session?.user?.email,
-  };
+  const user = session?.user;
 
   return (
     <>
@@ -56,10 +54,10 @@ export const Layout = ({ children }: Props) => {
           sidebarOpen={sidebarOpen}
           setSidebarOpen={setSidebarOpen}
           navItems={navItems}
-          user={user}
+          user={user as User}
         />
 
-        <SideBar navItems={navItems} user={user} />
+        <SideBar navItems={navItems} user={user as User} />
         <div className="flex flex-col flex-1 md:pl-64">
           <Hamburger setSidebarOpen={setSidebarOpen} />
           {/* Main Content Panel */}

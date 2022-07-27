@@ -9,7 +9,7 @@ export type SidebarProps = {
   navItems: NavItem[];
   sidebarOpen: boolean;
   setSidebarOpen: (value: boolean) => void;
-  user: User;
+  user?: User | null;
 };
 
 export const SidebarMobile = ({
